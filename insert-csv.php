@@ -4,19 +4,24 @@ require 'database.php';
 
 $path = "gac.csv";
 
-$db->exec(
+try {
 
-    sprintf("LOAD DATA local INFILE '%s' INTO TABLE mobiledata 
-    
-            FIELDS TERMINATED BY ';'
-            
-            LINES TERMINATED BY '\n'
+        $db->exec(
 
-            IGNORE 3 LINES", 
-            
-            $path)
-    );
+                sprintf("LOAD DATA local INFILE '%s' INTO TABLE mobiledata 
 
-    var_dump('insertion du fichier csv réussi');
+                FIELDS TERMINATED BY ';'
 
-    die();
+                LINES TERMINATED BY '\n'
+
+                IGNORE 3 LINES", 
+
+                $path)
+        );
+
+        echo "insertion du fichier csv réussi";
+
+} catch(Exception $e) {
+
+        echo "l'insertion du fichier a échoué";
+}
